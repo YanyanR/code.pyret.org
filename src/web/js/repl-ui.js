@@ -81,6 +81,7 @@
       var rr = resultRuntime;
 
       function renderAndDisplayError(runtime, error, stack, click) {
+        console.log("renderAndDisplayError error: ", error);
         var error_to_html = errorUI.error_to_html;
         return runtime.pauseStack(function (restarter) {
           return error_to_html(runtime, CPO.documents, error, stack).
@@ -97,6 +98,7 @@
       }
 
       return function(result) {
+        console.log("repl-ui displayResult result: ", result);
         var doneDisplay = Q.defer();
         var didError = false;
         callingRuntime.runThunk(function() {
@@ -113,10 +115,12 @@
                 closeAnimationIfOpen();
                 didError = true;
                 // Compile Errors
+                //NOTE: runtime.getField(runResult.result, "answer")
                 var errors = ffi.toArray(compileResultErrors).
                   reduce(function (errors, error) {
                       Array.prototype.push.apply(errors,
                         ffi.toArray(runtime.getField(error, "problems")));
+                      console.log("errors: ", errors);
                       return errors;
                     }, []);
                 return callingRuntime.safeCall(

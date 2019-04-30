@@ -1151,6 +1151,8 @@
             e.stopPropagation();
           });
         }
+        console.log("in output-ui!!!!!");
+        console.log("outText: ", outText);
         return outText;
       };
       // Copied from runtime-anf, and tweaked.  Probably should be exported from runtime-anf instad

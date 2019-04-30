@@ -264,6 +264,7 @@
                   });
               }, function(result) {
                 ret.resolve(result);
+                console.log("restartInteractions's result: ", result);
                 // NOTE: result here seems to refer to the initialization, not eval result of a particular cm instance
                 // if (runtime.isSuccessResult(result)) {
                 //   tutorial.afterRun("success");
@@ -275,6 +276,9 @@
             return ret.promise;
           },
           run: function(str, name) {
+            console.log("is this run?????");
+            console.log("str: ", str);
+            console.log("name: ", name);
             var ret = Q.defer();
             setTimeout(function() {
               runtime.runThunk(function() {
@@ -289,6 +293,10 @@
                   });
               }, function(result) {
                 ret.resolve(result);
+                console.log("run's result: ", result);
+                console.log("result methods: ", Object.getOwnPropertyNames(result));
+                console.log("result.result: ", result.result);
+                console.log("result.stats: ", result.stats);
               }, "make-interaction-locator");
             }, 0);
             return ret.promise;
